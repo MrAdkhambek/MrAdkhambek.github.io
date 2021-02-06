@@ -1,1 +1,1 @@
-# MrAdkhambek.github.io
+# https://mradkhambek.github.io/
