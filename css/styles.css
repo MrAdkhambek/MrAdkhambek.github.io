@@ -72,8 +72,8 @@ ul { list-style: none; }
   z-index: 100;
   height: var(--nav-h);
   background: rgba(15, 15, 15, .85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
@@ -312,15 +312,18 @@ section + section {
 }
 
 .timeline-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
+  background: rgba(26, 26, 26, .45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, .06);
   border-radius: var(--radius);
   padding: 1.5rem;
-  transition: border-color .2s;
+  transition: border-color .2s, background .2s;
 }
 
 .timeline-card:hover {
-  border-color: #444;
+  border-color: rgba(255, 255, 255, .12);
+  background: rgba(26, 26, 26, .6);
 }
 
 .timeline-header {
@@ -402,8 +405,10 @@ section + section {
   font-family: var(--font-mono);
   font-size: .8rem;
   padding: .35rem .85rem;
-  background: var(--surface);
-  border: 1px solid var(--border);
+  background: rgba(26, 26, 26, .45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, .06);
   border-radius: 6px;
   color: var(--text);
   transition: border-color .2s, background .2s, color .2s;
@@ -412,7 +417,7 @@ section + section {
 .skill-tag:hover {
   border-color: var(--accent);
   color: var(--accent);
-  background: rgba(79, 156, 247, .06);
+  background: rgba(79, 156, 247, .1);
 }
 
 /* ===== Projects ===== */
@@ -431,18 +436,21 @@ section + section {
 }
 
 .project-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
+  background: rgba(26, 26, 26, .45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, .06);
   border-radius: var(--radius);
   padding: 1.25rem;
-  transition: border-color .2s, transform .2s;
+  transition: border-color .2s, transform .2s, background .2s;
   display: flex;
   flex-direction: column;
   gap: .5rem;
 }
 
 .project-card:hover {
-  border-color: #444;
+  border-color: rgba(255, 255, 255, .12);
+  background: rgba(26, 26, 26, .6);
   transform: translateY(-3px);
 }
 
