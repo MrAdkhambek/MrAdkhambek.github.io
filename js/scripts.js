@@ -15,12 +15,12 @@
     var camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 100);
     camera.position.z = 10;
 
-    var LAYER_SIZES = [4, 6, 6, 4];
+    var LAYER_SIZES = [3, 5, 5, 3];
     var LINE_COLOR = new THREE.Color(0x284f82);
     var NODE_COLOR = new THREE.Color(0x284f82);
     var PULSE_COLOR = new THREE.Color(0x4f9cf7);
-    var LINE_ALPHA = 0.07;
-    var NODE_ALPHA = 0.12;
+    var LINE_ALPHA = 0.10;
+    var NODE_ALPHA = 0.16;
     var PASS_INTERVAL = 3;
 
     var nodes = [];       // flat array of {pos: Vector3, activation: 0, layer: l}
@@ -111,7 +111,7 @@
         nodeColors[i*3] = NODE_COLOR.r;
         nodeColors[i*3+1] = NODE_COLOR.g;
         nodeColors[i*3+2] = NODE_COLOR.b;
-        nodeSizes[i] = 14;
+        nodeSizes[i] = 20;
       }
 
       geo.setAttribute('position', new THREE.BufferAttribute(nodePositions, 3));
@@ -226,7 +226,7 @@
 
       // Update node sizes based on activation
       for (var i = 0; i < nodes.length; i++) {
-        nodeSizes[i] = 14 + nodes[i].activation * 10;
+        nodeSizes[i] = 20 + nodes[i].activation * 12;
         var a = nodes[i].activation;
         nodeColors[i*3] = NODE_COLOR.r + (PULSE_COLOR.r - NODE_COLOR.r) * a;
         nodeColors[i*3+1] = NODE_COLOR.g + (PULSE_COLOR.g - NODE_COLOR.g) * a;
@@ -257,7 +257,7 @@
         pulseColors[active*3] = PULSE_COLOR.r;
         pulseColors[active*3+1] = PULSE_COLOR.g;
         pulseColors[active*3+2] = PULSE_COLOR.b;
-        pulseSizes[active] = 6 + glow * 6;
+        pulseSizes[active] = 8 + glow * 8;
         active++;
       }
 
