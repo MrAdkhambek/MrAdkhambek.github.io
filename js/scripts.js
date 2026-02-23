@@ -1,42 +1,65 @@
-/*!
-    * Start Bootstrap - Resume v6.0.2 (https://startbootstrap.com/theme/resume)
-    * Copyright 2013-2020 Start Bootstrap
-    * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-resume/blob/master/LICENSE)
-    */
-    (function ($) {
-    "use strict"; // Start of use strict
+(function () {
+  'use strict';
 
-    // Smooth scrolling using jQuery easing
-    $('a.js-scroll-trigger[href*="#"]:not([href="#"])').click(function () {
-        if (
-            location.pathname.replace(/^\//, "") ==
-                this.pathname.replace(/^\//, "") &&
-            location.hostname == this.hostname
-        ) {
-            var target = $(this.hash);
-            target = target.length
-                ? target
-                : $("[name=" + this.hash.slice(1) + "]");
-            if (target.length) {
-                $("html, body").animate(
-                    {
-                        scrollTop: target.offset().top,
-                    },
-                    1000,
-                    "easeInOutExpo"
-                );
-                return false;
-            }
+  // ===== Scroll Reveal =====
+  var reveals = document.querySelectorAll('.reveal');
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    reveals.forEach(function (el) { el.classList.add('visible'); });
+  } else {
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
         }
-    });
+      });
+    }, { threshold: 0.1 });
 
-    // Closes responsive menu when a scroll trigger link is clicked
-    $(".js-scroll-trigger").click(function () {
-        $(".navbar-collapse").collapse("hide");
-    });
+    reveals.forEach(function (el) { revealObserver.observe(el); });
+  }
 
-    // Activate scrollspy to add active class to navbar items on scroll
-    $("body").scrollspy({
-        target: "#sideNav",
+  // ===== Scroll Spy for Nav =====
+  var navLinks = document.querySelectorAll('.nav-links a');
+  var sections = [];
+
+  navLinks.forEach(function (link) {
+    var id = link.getAttribute('href').slice(1);
+    var section = document.getElementById(id);
+    if (section) sections.push({ el: section, link: link });
+  });
+
+  var spyObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        navLinks.forEach(function (l) { l.classList.remove('active'); });
+        sections.forEach(function (s) {
+          if (s.el === entry.target) s.link.classList.add('active');
+        });
+      }
     });
-})(jQuery); // End of use strict
+  }, { rootMargin: '-40% 0px -60% 0px' });
+
+  sections.forEach(function (s) { spyObserver.observe(s.el); });
+
+  // ===== Close mobile nav on link click =====
+  var navToggle = document.getElementById('nav-toggle');
+
+  navLinks.forEach(function (link) {
+    link.addEventListener('click', function () {
+      if (navToggle) navToggle.checked = false;
+    });
+  });
+
+  // ===== Smooth scroll for nav links (fallback) =====
+  navLinks.forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      var id = this.getAttribute('href').slice(1);
+      var target = document.getElementById(id);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+})();
