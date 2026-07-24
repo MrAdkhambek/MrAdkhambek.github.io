@@ -321,6 +321,19 @@
     window.addEventListener('resize', onResize);
   }
 
+  // ===== Dynamic Experience Years =====
+  var startDate = new Date(2018, 9);
+  var years = Math.floor((new Date() - startDate) / (365.25 * 24 * 60 * 60 * 1000));
+  var yearsEl = document.getElementById('years-exp');
+  if (yearsEl) yearsEl.textContent = years + '+';
+  document.querySelectorAll('.about-text, meta[name="description"]').forEach(function (el) {
+    if (el.tagName === 'META') {
+      el.content = el.content.replace(/\d+\+\s*years/, years + '+ years');
+    } else {
+      el.innerHTML = el.innerHTML.replace(/\d+\+\s*years/, years + '+ years');
+    }
+  });
+
   // ===== Scroll Reveal =====
   var reveals = document.querySelectorAll('.reveal');
 
